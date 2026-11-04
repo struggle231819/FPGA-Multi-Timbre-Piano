@@ -1,0 +1,27 @@
+# Gowin EDA generated build artifacts
+impl/temp/
+impl/gwsynthesis/
+impl/pnr/*.db
+impl/pnr/*.p
+impl/pnr/*.pr
+impl/pnr/*.tr
+impl/pnr/*.bin
+impl/pnr/*.binx
+impl/pnr/*.fs
+impl/pnr/*.log
+impl/pnr/*.html
+impl/pnr/*.txt
+impl/pnr/*.timing_paths
+impl/pnr/cmd.do
+impl/pnr/device.cfg
+
+# User-specific local IDE state
+*.gprj.user
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+.vscode/
+.idea/
