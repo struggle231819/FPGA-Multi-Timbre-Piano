@@ -1,0 +1,214 @@
+// =============================================================================
+// 文件名: tang_primer_25k_full_synth.cst
+// 适用开发板: Sipeed Tang Primer 25K (GW5A-LV25MG121NC1/I0) + 25K Dock 底板
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// 1. System Clock (50MHz Crystal), Status LED & Dock Buttons (S1 / S2)
+// -----------------------------------------------------------------------------
+IO_LOC  "clk"            E2;
+IO_PORT "clk"            IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+
+IO_LOC  "led"            E8;
+IO_PORT "led"            IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+// Dock onboard buttons S1 (H11: Mode Switch) & S2 (H10: Sub-item Switch)
+// Hold S1 + S2 together to launch 3-point XPT2046 touch screen calibration
+IO_LOC  "s1_key"         H11;
+IO_PORT "s1_key"         IO_TYPE=LVCMOS33 PULL_MODE=DOWN;
+
+IO_LOC  "s2_key"         H10;
+IO_PORT "s2_key"         IO_TYPE=LVCMOS33 PULL_MODE=DOWN;
+
+// -----------------------------------------------------------------------------
+// 2. 2.4-inch ILI9341 320x240 RGB565 SPI Color LCD + XPT2046 Touch Screen
+//    T_IRQ -> J10, T_DO -> F6, T_DIN -> K8, T_CS -> K9, T_CLK -> K10
+//    MISO  -> NC (Unconnected), LED -> 3.3V
+//    SCK   -> L8,  MOSI -> J7, DC -> H2, RESET -> G10, CS -> G11
+// -----------------------------------------------------------------------------
+IO_LOC  "tp_irq"         J10;
+IO_PORT "tp_irq"         IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "tp_do"          F6;
+IO_PORT "tp_do"          IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "tp_din"         K8;
+IO_PORT "tp_din"         IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+IO_LOC  "tp_cs"          K9;
+IO_PORT "tp_cs"          IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+IO_LOC  "tp_clk"         K10;
+IO_PORT "tp_clk"         IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+IO_LOC  "lcd_sck"        L8;
+IO_PORT "lcd_sck"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+IO_LOC  "lcd_sdi"        J7;
+IO_PORT "lcd_sdi"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+IO_LOC  "lcd_dc"         H2;
+IO_PORT "lcd_dc"         IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+IO_LOC  "lcd_reset"      G10;
+IO_PORT "lcd_reset"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+IO_LOC  "lcd_cs"         G11;
+IO_PORT "lcd_cs"         IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+// -----------------------------------------------------------------------------
+// 3. 11 White-Key Copper-Foil Capacitive Velocity Sensing Pins (vel_io[10:0])
+//    Each white key copper foil connects to GND via 1M ohm resistor and to
+//    FPGA vel_io[i] via 1k ohm series resistor:
+//    H4(C4), J2(D4), D1(E4), A1(F4), F1(G4), C2(A4), L3(B4), G1(C5), K4(D5), L1(E5), K2(F5)
+// -----------------------------------------------------------------------------
+IO_LOC  "vel_io[0]"      H4;
+IO_PORT "vel_io[0]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[1]"      J2;
+IO_PORT "vel_io[1]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[2]"      D1;
+IO_PORT "vel_io[2]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[3]"      A1;
+IO_PORT "vel_io[3]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[4]"      F1;
+IO_PORT "vel_io[4]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[5]"      C2;
+IO_PORT "vel_io[5]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[6]"      L3;
+IO_PORT "vel_io[6]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[7]"      G1;
+IO_PORT "vel_io[7]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[8]"      K4;
+IO_PORT "vel_io[8]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[9]"      L1;
+IO_PORT "vel_io[9]"      IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "vel_io[10]"     K2;
+IO_PORT "vel_io[10]"     IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+// -----------------------------------------------------------------------------
+// 4. PCM5102A 24-Bit Stereo I2S DAC (8 Pins -> Analog L/R to PAM8403 INL/INR)
+//    FLT->A11, DMP->E11, SCL->K11, BCK->L5, DIN->A10, LCK->E10, FMT->L11, XMT->K5
+// -----------------------------------------------------------------------------
+IO_LOC  "pcm_flt"        A11;
+IO_PORT "pcm_flt"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "pcm_dmp"        E11;
+IO_PORT "pcm_dmp"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "pcm_scl"        K11;
+IO_PORT "pcm_scl"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "pcm_bck"        L5;
+IO_PORT "pcm_bck"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "pcm_din"        A10;
+IO_PORT "pcm_din"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "pcm_lck"        E10;
+IO_PORT "pcm_lck"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "pcm_fmt"        L11;
+IO_PORT "pcm_fmt"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+IO_LOC  "pcm_xmt"        K5;
+IO_PORT "pcm_xmt"        IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=4;
+
+// -----------------------------------------------------------------------------
+// 5. JDY-23 BLE UART Interface (TXD -> H5, RXD -> J5, Auto-Polarity & Auto-Baud)
+// -----------------------------------------------------------------------------
+IO_LOC  "bt_rx"          H5;
+IO_PORT "bt_rx"          IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8;
+
+IO_LOC  "bt_tx"          J5;
+IO_PORT "bt_tx"          IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=8;
+
+// -----------------------------------------------------------------------------
+// 6. Dual Rotary Encoders (Active-Low with Internal Pull-Ups)
+//    Encoder 1 (Volume + Vibrato SW):     A -> F5, B -> G7, SW -> H8
+//    Encoder 2 (Timbre + Portamento SW):  A -> G5, B -> G8, SW -> H7
+// -----------------------------------------------------------------------------
+IO_LOC  "enc1_a"         F5;
+IO_PORT "enc1_a"         IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "enc1_b"         G7;
+IO_PORT "enc1_b"         IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "enc1_sw_n"      H8;
+IO_PORT "enc1_sw_n"      IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "enc2_a"         G5;
+IO_PORT "enc2_a"         IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "enc2_b"         G8;
+IO_PORT "enc2_b"         IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "enc2_sw_n"      H7;
+IO_PORT "enc2_sw_n"      IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// -----------------------------------------------------------------------------
+// 7. 18 Tactile Piano Keys K0~K17 (C4 to F5, Active-Low with Internal Pull-Ups)
+//    J11, F7, J8, L9, L10, L7, K7, H1, G4, J1, E3, E1, F2, L4, G2, J4, L2, K1
+// -----------------------------------------------------------------------------
+IO_LOC  "keys_raw_n[0]"  J11;
+IO_PORT "keys_raw_n[0]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[1]"  F7;
+IO_PORT "keys_raw_n[1]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[2]"  J8;
+IO_PORT "keys_raw_n[2]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[3]"  L9;
+IO_PORT "keys_raw_n[3]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[4]"  L10;
+IO_PORT "keys_raw_n[4]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[5]"  L7;
+IO_PORT "keys_raw_n[5]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[6]"  K7;
+IO_PORT "keys_raw_n[6]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[7]"  H1;
+IO_PORT "keys_raw_n[7]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[8]"  G4;
+IO_PORT "keys_raw_n[8]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[9]"  J1;
+IO_PORT "keys_raw_n[9]"  IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[10]" E3;
+IO_PORT "keys_raw_n[10]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[11]" E1;
+IO_PORT "keys_raw_n[11]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[12]" F2;
+IO_PORT "keys_raw_n[12]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[13]" L4;
+IO_PORT "keys_raw_n[13]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[14]" G2;
+IO_PORT "keys_raw_n[14]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[15]" J4;
+IO_PORT "keys_raw_n[15]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[16]" L2;
+IO_PORT "keys_raw_n[16]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+IO_LOC  "keys_raw_n[17]" K1;
+IO_PORT "keys_raw_n[17]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
