@@ -1,0 +1,17 @@
+<?xml version="1" encoding="UTF-8"?>
+<!DOCTYPE gowin-fpga-project>
+<Project>
+    <Template>FPGA</Template>
+    <Version>5</Version>
+    <Device name="GW5A-25A" pn="GW5A-LV25MG121NC1/I0">gw5a25a-002</Device>
+    <FileList>
+        <File path="src/audio.v" type="file.verilog" enable="1"/>
+        <File path="src/bt_uart_bridge.v" type="file.verilog" enable="1"/>
+        <File path="src/ili9341_touch_ui.v" type="file.verilog" enable="1"/>
+        <File path="src/key_encoder_input.v" type="file.verilog" enable="1"/>
+        <File path="src/poly32_fm_synth.v" type="file.verilog" enable="1"/>
+        <File path="src/tang_primer_25k_synth_top.v" type="file.verilog" enable="1"/>
+        <File path="src/tang_primer_25k_full_synth.cst" type="file.cst" enable="1"/>
+        <File path="src/tang_primer_25k_synth.sdc" type="file.sdc" enable="1"/>
+    </FileList>
+</Project>
