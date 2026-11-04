@@ -256,4 +256,3 @@ FPGA-Multi-Timbre-Piano/
 
 * **作者 (Author)**：[ges280388-hub](https://github.com/ges280388-hub)
 * **开源协议 (License)**：本项目基于 MIT License 开源，版权所有 `Copyright (c) 2026 ges280388-hub`，欢迎 Star、Fork 与二次开发交流。
-
